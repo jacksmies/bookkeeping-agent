@@ -24,13 +24,7 @@ def test_agent_keeps_internal_module_for_syncing():
 		assert read_json(metadata_file)["module"] == "Bookkeeping Agent"
 
 
-def test_legacy_desk_route_redirect_asset_is_included():
+def test_no_global_desk_redirect_is_included():
 	hooks = (APP_ROOT / "bookkeeping_agent" / "hooks.py").read_text(encoding="utf-8")
-	assert "bookkeeping_agent_redirect.js" in hooks
-
-	redirect_js = APP_ROOT / "bookkeeping_agent" / "public" / "js" / "bookkeeping_agent_redirect.js"
-	assert redirect_js.exists()
-
-	redirect_source = redirect_js.read_text(encoding="utf-8")
-	assert "/desk/bookkeeping-agent" in redirect_source
-	assert "/app/bookkeeping-agent" in redirect_source
+	assert "app_include_js" not in hooks.replace("# app_include_js", "")
+	assert "bookkeeping_agent_redirect.js" not in hooks

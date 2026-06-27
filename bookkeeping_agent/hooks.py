@@ -26,7 +26,7 @@ required_apps = ["erpnext"]
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/bookkeeping_agent/css/bookkeeping_agent.css"
-app_include_js = "/assets/bookkeeping_agent/js/bookkeeping_agent_redirect.js"
+# app_include_js = "/assets/bookkeeping_agent/js/bookkeeping_agent.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/bookkeeping_agent/css/bookkeeping_agent.css"
