@@ -1,33 +1,46 @@
-### Bookkeeping Agent
+# Bookkeeping Agent
 
-AI CFO Agent
+Standalone Frappe app for the ERPNext Bookkeeping Agent.
 
-### Installation
+This app provides:
 
-You can install this app using the [bench](https://github.com/frappe/bench) CLI:
+- Desk page at `/app/bookkeeping-agent`
+- Server-side OpenAI Responses API orchestration
+- ERPNext bookkeeping read/write tools
+- Pending-action confirmation flow for accounting writes
+- Bookkeeping Agent memory DocTypes
 
-```bash
-cd $PATH_TO_YOUR_BENCH
-bench get-app $URL_OF_THIS_REPO --branch develop
-bench install-app bookkeeping_agent
-```
+ERPNext must already be installed on the site.
 
-### Contributing
-
-This app uses `pre-commit` for code formatting and linting. Please [install pre-commit](https://pre-commit.com/#installation) and enable it for this repository:
+## Install In A Bench
 
 ```bash
-cd apps/bookkeeping_agent
-pre-commit install
+cd /workspace/development/frappe-bench
+bench get-app git@github.com:jacksmies/bookkeeping-agent.git --branch main
+bench --site development.localhost install-app bookkeeping_agent
+bench --site development.localhost migrate
+bench build --app bookkeeping_agent
 ```
 
-Pre-commit is configured to use the following tools for checking and formatting your code:
+## Docker Build Apps File
 
-- ruff
-- eslint
-- prettier
-- pyupgrade
+For `frappe_docker`, install official ERPNext first, then this app:
 
-### License
+```json
+[
+  {
+    "url": "https://github.com/frappe/erpnext.git",
+    "branch": "develop"
+  },
+  {
+    "url": "git@github.com:jacksmies/bookkeeping-agent.git",
+    "branch": "main"
+  }
+]
+```
 
-mit
+Use matching Frappe and ERPNext branches for your target version.
+
+## License
+
+GNU General Public License v3 or later.

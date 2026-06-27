@@ -1,0 +1,29 @@
+{
+ "content": null,
+ "creation": "2026-06-13 00:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2026-06-13 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Bookkeeping Agent",
+ "name": "bookkeeping-agent",
+ "owner": "Administrator",
+ "page_name": "Bookkeeping Agent",
+ "roles": [
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Bookkeeping Agent"
+}

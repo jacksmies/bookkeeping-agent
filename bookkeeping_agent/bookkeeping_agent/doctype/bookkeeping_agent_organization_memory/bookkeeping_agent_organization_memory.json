@@ -1,0 +1,125 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "field:memory_name",
+ "creation": "2026-06-19 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "title",
+  "enabled",
+  "priority",
+  "applies_to_doctype",
+  "trigger_terms",
+  "memory",
+  "source",
+  "last_used_on",
+  "memory_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Enabled"
+  },
+  {
+   "default": "100",
+   "fieldname": "priority",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Priority"
+  },
+  {
+   "fieldname": "applies_to_doctype",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Applies To DocType",
+   "options": "DocType"
+  },
+  {
+   "description": "Comma or newline separated terms that should cause this organization fact to be retrieved.",
+   "fieldname": "trigger_terms",
+   "fieldtype": "Small Text",
+   "label": "Trigger Terms"
+  },
+  {
+   "fieldname": "memory",
+   "fieldtype": "Text",
+   "label": "Memory",
+   "reqd": 1
+  },
+  {
+   "default": "Admin Review",
+   "fieldname": "source",
+   "fieldtype": "Select",
+   "label": "Source",
+   "options": "\nAdmin Review\nLog Review\nManual Entry",
+   "reqd": 1
+  },
+  {
+   "fieldname": "last_used_on",
+   "fieldtype": "Datetime",
+   "label": "Last Used On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "memory_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Memory Name",
+   "no_copy": 1,
+   "read_only": 1,
+   "reqd": 1,
+   "unique": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 0,
+ "modified": "2026-06-19 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Bookkeeping Agent",
+ "name": "Bookkeeping Agent Organization Memory",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "company,title,trigger_terms",
+ "sort_field": "priority",
+ "sort_order": "ASC",
+ "states": [],
+ "title_field": "title"
+}

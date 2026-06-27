@@ -1,0 +1,10 @@
+[
+  {
+    "url": "https://github.com/frappe/erpnext.git",
+    "branch": "develop"
+  },
+  {
+    "url": "git@github.com:jacksmies/bookkeeping-agent.git",
+    "branch": "main"
+  }
+]

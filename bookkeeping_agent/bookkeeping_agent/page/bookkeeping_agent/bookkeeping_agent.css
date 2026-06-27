@@ -1,0 +1,1010 @@
+.bookkeeping-agent {
+	--ba-surface: #ffffff;
+	--ba-page: #f7f8f6;
+	--ba-ink: #202426;
+	--ba-muted: #687175;
+	--ba-line: #e1e6e2;
+	--ba-accent: #2f6fed;
+	--ba-safe: #197056;
+	--ba-warn: #b86b20;
+	--ba-soft-line: color-mix(in srgb, var(--ba-line) 72%, transparent);
+	--ba-accent-soft: color-mix(in srgb, var(--ba-accent) 11%, transparent);
+	--ba-safe-soft: color-mix(in srgb, var(--ba-safe) 11%, transparent);
+	--ba-warn-soft: color-mix(in srgb, var(--ba-warn) 12%, transparent);
+	--ba-shadow: 0 18px 55px rgba(32, 36, 38, 0.08);
+	--ba-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+	display: flex;
+	justify-content: center;
+	height: calc(100vh - 132px);
+	min-height: 650px;
+	padding: 18px 24px 20px;
+	background:
+		linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0) 190px),
+		var(--ba-page);
+	color: var(--ba-ink);
+}
+
+.bookkeeping-agent * {
+	box-sizing: border-box;
+}
+
+.bookkeeping-agent-chat {
+	display: flex;
+	flex-direction: column;
+	width: min(100%, 1040px);
+	min-width: 0;
+	min-height: 0;
+}
+
+.bookkeeping-agent-messages {
+	flex: 1;
+	min-height: 0;
+	overflow-y: auto;
+	padding: 18px 10px 24px;
+	scroll-behavior: smooth;
+}
+
+.bookkeeping-agent-sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.bookkeeping-agent-welcome {
+	display: grid;
+	grid-template-columns: 42px minmax(0, 1fr);
+	gap: 16px;
+	width: min(100%, 720px);
+	margin: clamp(72px, 14vh, 150px) auto 0;
+	color: var(--ba-ink);
+}
+
+.bookkeeping-agent-welcome-mark,
+.bookkeeping-agent-avatar,
+.bookkeeping-agent-approval-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	color: var(--ba-muted);
+}
+
+.bookkeeping-agent-welcome-mark {
+	width: 42px;
+	height: 42px;
+	border: 1px solid var(--ba-line);
+	border-radius: 14px;
+	background: var(--ba-surface);
+	box-shadow: 0 8px 24px rgba(32, 36, 38, 0.06);
+	color: var(--ba-accent);
+}
+
+.bookkeeping-agent-kicker,
+.bookkeeping-agent-approval-kicker,
+.bookkeeping-agent-workflow-eyebrow {
+	color: var(--ba-muted);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0;
+	line-height: 1.2;
+	text-transform: uppercase;
+}
+
+.bookkeeping-agent-welcome-title {
+	max-width: 680px;
+	margin-top: 2px;
+	color: var(--ba-ink);
+	font-size: clamp(24px, 4vw, 40px);
+	font-weight: 680;
+	line-height: 1.08;
+}
+
+.bookkeeping-agent-welcome-copy {
+	max-width: 620px;
+	margin-top: 10px;
+	color: var(--ba-muted);
+	font-size: 14px;
+	line-height: 1.6;
+}
+
+.bookkeeping-agent-message {
+	position: relative;
+	display: grid;
+	grid-template-columns: 34px minmax(0, 1fr);
+	gap: 12px;
+	width: min(100%, 900px);
+	margin: 0 auto 30px;
+}
+
+.bookkeeping-agent-message-user {
+	display: flex;
+	justify-content: flex-end;
+	width: min(100%, 900px);
+}
+
+.bookkeeping-agent-message-content {
+	min-width: 0;
+	max-width: 100%;
+}
+
+.bookkeeping-agent-avatar {
+	width: 30px;
+	height: 30px;
+	margin-top: 2px;
+	border: 1px solid var(--ba-line);
+	border-radius: 11px;
+	background: var(--ba-surface);
+	color: var(--ba-muted);
+}
+
+.bookkeeping-agent-message-body {
+	max-width: 100%;
+	color: var(--ba-ink);
+	font-size: 14px;
+	line-height: 1.62;
+	overflow-wrap: anywhere;
+}
+
+.bookkeeping-agent-message-assistant .bookkeeping-agent-message-body {
+	padding-top: 1px;
+}
+
+.bookkeeping-agent-message-user .bookkeeping-agent-message-content {
+	display: flex;
+	justify-content: flex-end;
+	max-width: min(680px, 78%);
+}
+
+.bookkeeping-agent-message-user .bookkeeping-agent-message-body {
+	border: 1px solid var(--ba-line);
+	border-radius: 18px 18px 6px 18px;
+	padding: 11px 15px;
+	background: var(--ba-surface);
+	box-shadow: 0 8px 26px rgba(32, 36, 38, 0.05);
+	color: var(--ba-ink);
+	line-height: 1.45;
+}
+
+.bookkeeping-agent-message-error .bookkeeping-agent-message-body {
+	border-left: 3px solid var(--red-500, #e03131);
+	padding: 11px 13px;
+	border-radius: 10px;
+	background: var(--red-50, #fff5f2);
+	color: var(--red-700, #8a331f);
+}
+
+.bookkeeping-agent-result-message {
+	margin-top: -14px;
+}
+
+.bookkeeping-agent-result-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	max-width: 100%;
+	border: 1px solid var(--ba-line);
+	border-radius: 999px;
+	padding: 7px 11px;
+	background: var(--ba-surface);
+	color: var(--ba-accent);
+	font-size: 12px;
+	font-weight: 650;
+	text-decoration: none;
+}
+
+.bookkeeping-agent-result-link:hover {
+	border-color: color-mix(in srgb, var(--ba-accent) 36%, var(--ba-line));
+	color: var(--ba-accent);
+	text-decoration: none;
+}
+
+.bookkeeping-agent-message-body.is-streaming::after {
+	content: "";
+	display: inline-block;
+	width: 6px;
+	height: 1em;
+	margin-left: 4px;
+	border-radius: 1px;
+	background: currentColor;
+	vertical-align: -2px;
+	animation: bookkeeping-agent-cursor 0.85s infinite;
+}
+
+.bookkeeping-agent-message-body > :first-child {
+	margin-top: 0;
+}
+
+.bookkeeping-agent-message-body > :last-child {
+	margin-bottom: 0;
+}
+
+.bookkeeping-agent-message-body p,
+.bookkeeping-agent-message-body ul,
+.bookkeeping-agent-message-body ol,
+.bookkeeping-agent-message-body blockquote,
+.bookkeeping-agent-message-body table,
+.bookkeeping-agent-message-body pre {
+	margin-bottom: 12px;
+}
+
+.bookkeeping-agent-message-body h1,
+.bookkeeping-agent-message-body h2,
+.bookkeeping-agent-message-body h3,
+.bookkeeping-agent-message-body h4,
+.bookkeeping-agent-message-body h5,
+.bookkeeping-agent-message-body h6 {
+	margin: 14px 0 8px;
+	color: var(--ba-ink);
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+.bookkeeping-agent-message-body ul,
+.bookkeeping-agent-message-body ol {
+	padding-left: 20px;
+}
+
+.bookkeeping-agent-message-body li + li {
+	margin-top: 3px;
+}
+
+.bookkeeping-agent-message-body blockquote {
+	border-left: 3px solid var(--ba-line);
+	padding: 8px 0 8px 12px;
+	color: var(--ba-muted);
+}
+
+.bookkeeping-agent-message-body a {
+	color: var(--ba-accent);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.bookkeeping-agent-message-body a:hover {
+	text-decoration: underline;
+}
+
+.bookkeeping-agent-message-body code {
+	border: 1px solid var(--ba-line);
+	border-radius: 5px;
+	padding: 1px 5px;
+	background: rgba(255, 255, 255, 0.72);
+	font-family: var(--ba-mono);
+	font-size: 12px;
+	font-variant-numeric: tabular-nums;
+}
+
+.bookkeeping-agent-message-body pre {
+	max-width: 100%;
+	overflow: auto;
+	border: 1px solid var(--ba-line);
+	border-radius: 10px;
+	padding: 12px;
+	background: var(--ba-surface);
+	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
+}
+
+.bookkeeping-agent-message-body pre code {
+	border: 0;
+	padding: 0;
+	background: transparent;
+}
+
+.bookkeeping-agent-message-body table {
+	display: block;
+	width: max-content;
+	max-width: 100%;
+	overflow: auto;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border: 1px solid var(--ba-line);
+	border-radius: 10px;
+	background: var(--ba-surface);
+	font-variant-numeric: tabular-nums;
+}
+
+.bookkeeping-agent-message-body th,
+.bookkeeping-agent-message-body td {
+	padding: 7px 10px;
+	border-bottom: 1px solid var(--ba-line);
+	border-right: 1px solid var(--ba-line);
+	text-align: left;
+	vertical-align: top;
+	white-space: nowrap;
+}
+
+.bookkeeping-agent-message-body th {
+	background: color-mix(in srgb, var(--ba-page) 74%, var(--ba-surface));
+	color: var(--ba-muted);
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.bookkeeping-agent-message-body td {
+	font-family: var(--ba-mono);
+	font-size: 12px;
+}
+
+.bookkeeping-agent-message-body tr:last-child td {
+	border-bottom: 0;
+}
+
+.bookkeeping-agent-message-body th:last-child,
+.bookkeeping-agent-message-body td:last-child {
+	border-right: 0;
+}
+
+.bookkeeping-agent-message-workflow {
+	width: min(100%, 790px);
+	margin-top: 16px;
+}
+
+.bookkeeping-agent-workflow {
+	position: relative;
+	border-left: 2px solid var(--ba-line);
+	padding-left: 16px;
+}
+
+.bookkeeping-agent-workflow::before {
+	content: "";
+	position: absolute;
+	top: 8px;
+	bottom: 8px;
+	left: -2px;
+	width: 2px;
+	background: linear-gradient(180deg, var(--ba-accent), var(--ba-safe));
+	opacity: 0.35;
+}
+
+.bookkeeping-agent-workflow-summary {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+	min-height: 42px;
+	cursor: pointer;
+	list-style: none;
+}
+
+.bookkeeping-agent-workflow-summary::-webkit-details-marker {
+	display: none;
+}
+
+.bookkeeping-agent-workflow-title,
+.bookkeeping-agent-tool-title,
+.bookkeeping-agent-tool-name,
+.bookkeeping-agent-approval-head,
+.bookkeeping-agent-action-buttons .btn,
+.bookkeeping-agent-result-message .btn {
+	display: flex;
+	align-items: center;
+	min-width: 0;
+}
+
+.bookkeeping-agent-workflow-title {
+	gap: 10px;
+}
+
+.bookkeeping-agent-workflow-dot,
+.bookkeeping-agent-tool-status-dot {
+	position: relative;
+	z-index: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: 24px;
+	height: 24px;
+	border: 1px solid var(--ba-line);
+	border-radius: 999px;
+	background: var(--ba-surface);
+	color: var(--ba-muted);
+}
+
+.bookkeeping-agent-workflow-dot.blue,
+.bookkeeping-agent-tool-status-dot.blue {
+	border-color: color-mix(in srgb, var(--ba-accent) 34%, var(--ba-line));
+	background: var(--ba-accent-soft);
+	color: var(--ba-accent);
+}
+
+.bookkeeping-agent-workflow-dot.green,
+.bookkeeping-agent-tool-status-dot.green {
+	border-color: color-mix(in srgb, var(--ba-safe) 34%, var(--ba-line));
+	background: var(--ba-safe-soft);
+	color: var(--ba-safe);
+}
+
+.bookkeeping-agent-workflow-dot.orange,
+.bookkeeping-agent-tool-status-dot.orange {
+	border-color: color-mix(in srgb, var(--ba-warn) 36%, var(--ba-line));
+	background: var(--ba-warn-soft);
+	color: var(--ba-warn);
+}
+
+.bookkeeping-agent-workflow-dot.red,
+.bookkeeping-agent-tool-status-dot.red {
+	border-color: var(--red-300, #f2a39a);
+	background: var(--red-50, #fff5f2);
+	color: var(--red-600, #c0392b);
+}
+
+.bookkeeping-agent-workflow-copy {
+	display: grid;
+	gap: 2px;
+	min-width: 0;
+}
+
+.bookkeeping-agent-workflow-line {
+	color: var(--ba-ink);
+	font-size: 13px;
+	font-weight: 680;
+	line-height: 1.3;
+}
+
+.bookkeeping-agent-workflow-state,
+.bookkeeping-agent-tool-status {
+	flex: 0 0 auto;
+	border-radius: 999px;
+	padding: 3px 8px;
+	background: rgba(255, 255, 255, 0.74);
+	color: var(--ba-muted);
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.bookkeeping-agent-workflow-state.blue,
+.bookkeeping-agent-tool-status.blue {
+	background: var(--ba-accent-soft);
+	color: var(--ba-accent);
+}
+
+.bookkeeping-agent-workflow-state.green,
+.bookkeeping-agent-tool-status.green {
+	background: var(--ba-safe-soft);
+	color: var(--ba-safe);
+}
+
+.bookkeeping-agent-workflow-state.orange,
+.bookkeeping-agent-tool-status.orange {
+	background: var(--ba-warn-soft);
+	color: var(--ba-warn);
+}
+
+.bookkeeping-agent-workflow-state.red,
+.bookkeeping-agent-tool-status.red {
+	background: var(--red-50, #fff5f2);
+	color: var(--red-600, #c0392b);
+}
+
+.bookkeeping-agent-timeline {
+	padding: 3px 0 5px 0;
+}
+
+.bookkeeping-agent-tool-call {
+	position: relative;
+	display: grid;
+	grid-template-columns: 24px minmax(0, 1fr);
+	gap: 10px;
+	padding: 7px 0 11px;
+}
+
+.bookkeeping-agent-tool-call::before {
+	content: "";
+	position: absolute;
+	top: 30px;
+	bottom: -3px;
+	left: 11px;
+	width: 1px;
+	background: var(--ba-line);
+}
+
+.bookkeeping-agent-tool-call.is-last::before {
+	display: none;
+}
+
+.bookkeeping-agent-tool-main {
+	min-width: 0;
+	padding-top: 1px;
+}
+
+.bookkeeping-agent-tool-title {
+	justify-content: space-between;
+	gap: 10px;
+	color: var(--ba-ink);
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.3;
+}
+
+.bookkeeping-agent-tool-name {
+	gap: 7px;
+}
+
+.bookkeeping-agent-tool-name span:last-child {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.bookkeeping-agent-tool-message,
+.bookkeeping-agent-action-impact,
+.bookkeeping-agent-action-safety {
+	margin-top: 4px;
+	color: var(--ba-muted);
+	font-size: 12px;
+	line-height: 1.45;
+	overflow-wrap: anywhere;
+}
+
+.bookkeeping-agent-action-safety {
+	color: var(--ba-warn);
+	font-weight: 650;
+}
+
+.bookkeeping-agent-tool-details {
+	margin-top: 7px;
+}
+
+.bookkeeping-agent-tool-details summary {
+	display: inline-flex;
+	cursor: pointer;
+	color: var(--ba-muted);
+	font-size: 11px;
+	font-weight: 700;
+	list-style: none;
+}
+
+.bookkeeping-agent-tool-details summary::-webkit-details-marker {
+	display: none;
+}
+
+.bookkeeping-agent-tool-args {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: 7px;
+}
+
+.bookkeeping-agent-tool-arg {
+	display: inline-flex;
+	align-items: center;
+	min-width: 0;
+	max-width: 100%;
+	gap: 5px;
+	border: 1px solid var(--ba-line);
+	border-radius: 999px;
+	padding: 3px 8px;
+	background: rgba(255, 255, 255, 0.68);
+	color: var(--ba-ink);
+	font-family: var(--ba-mono);
+	font-size: 11px;
+	line-height: 1.25;
+}
+
+.bookkeeping-agent-tool-arg-key {
+	color: var(--ba-muted);
+	font-family: inherit;
+	font-weight: 700;
+}
+
+.bookkeeping-agent-approval-panel {
+	position: relative;
+	margin-top: 16px;
+	border: 1px solid color-mix(in srgb, var(--ba-warn) 32%, var(--ba-line));
+	border-radius: 18px;
+	padding: 14px;
+	background:
+		linear-gradient(90deg, var(--ba-warn-soft), rgba(255, 255, 255, 0) 45%),
+		var(--ba-surface);
+	box-shadow: 0 12px 34px rgba(32, 36, 38, 0.07);
+}
+
+.bookkeeping-agent-approval-head {
+	gap: 10px;
+	padding-bottom: 12px;
+	border-bottom: 1px solid var(--ba-soft-line);
+}
+
+.bookkeeping-agent-approval-icon {
+	width: 30px;
+	height: 30px;
+	border: 1px solid color-mix(in srgb, var(--ba-warn) 32%, var(--ba-line));
+	border-radius: 11px;
+	background: var(--ba-warn-soft);
+	color: var(--ba-warn);
+}
+
+.bookkeeping-agent-approval-title {
+	color: var(--ba-ink);
+	font-size: 14px;
+	font-weight: 720;
+	line-height: 1.25;
+}
+
+.bookkeeping-agent-action {
+	padding-top: 12px;
+}
+
+.bookkeeping-agent-action + .bookkeeping-agent-action {
+	margin-top: 12px;
+	border-top: 1px solid var(--ba-soft-line);
+}
+
+.bookkeeping-agent-action-main {
+	display: flex;
+	gap: 10px;
+	min-width: 0;
+}
+
+.bookkeeping-agent-action-title {
+	color: var(--ba-ink);
+	font-size: 14px;
+	font-weight: 720;
+	line-height: 1.35;
+}
+
+.bookkeeping-agent-action-details {
+	margin-top: 10px;
+}
+
+.bookkeeping-agent-action-details summary {
+	display: inline-flex;
+	cursor: pointer;
+	color: var(--ba-muted);
+	font-size: 12px;
+	font-weight: 700;
+	list-style: none;
+}
+
+.bookkeeping-agent-action-details summary::-webkit-details-marker {
+	display: none;
+}
+
+.bookkeeping-agent-action pre {
+	max-height: 190px;
+	margin: 8px 0 0;
+	overflow: auto;
+	border: 1px solid var(--ba-line);
+	border-radius: 10px;
+	padding: 10px;
+	background: rgba(255, 255, 255, 0.78);
+	color: var(--ba-ink);
+	font-family: var(--ba-mono);
+	font-size: 11px;
+	white-space: pre-wrap;
+}
+
+.bookkeeping-agent-action-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 12px;
+}
+
+.bookkeeping-agent-action-buttons .btn,
+.bookkeeping-agent-result-message .btn {
+	gap: 6px;
+}
+
+.bookkeeping-agent-composer {
+	flex: 0 0 auto;
+	padding: 0 10px 2px;
+}
+
+.bookkeeping-agent-input-shell {
+	border: 1px solid var(--ba-line);
+	border-radius: 24px;
+	padding: 12px;
+	background: rgba(255, 255, 255, 0.94);
+	box-shadow: var(--ba-shadow);
+	transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+
+.bookkeeping-agent-input-shell:focus-within {
+	border-color: color-mix(in srgb, var(--ba-accent) 58%, var(--ba-line));
+	box-shadow: 0 18px 55px rgba(47, 111, 237, 0.13);
+}
+
+.bookkeeping-agent-composer.is-disabled .bookkeeping-agent-input-shell {
+	background: color-mix(in srgb, var(--ba-surface) 88%, var(--ba-page));
+	box-shadow: 0 10px 26px rgba(32, 36, 38, 0.05);
+}
+
+.bookkeeping-agent .bookkeeping-agent-input.form-control {
+	display: block;
+	width: 100%;
+	height: 48px;
+	min-height: 48px;
+	max-height: 164px;
+	border: 0;
+	padding: 4px 4px 8px;
+	resize: none;
+	background: transparent;
+	box-shadow: none;
+	color: var(--ba-ink);
+	font-size: 15px;
+	line-height: 1.5;
+}
+
+.bookkeeping-agent .bookkeeping-agent-input.form-control:focus {
+	box-shadow: none;
+}
+
+.bookkeeping-agent .bookkeeping-agent-input.form-control::placeholder {
+	color: color-mix(in srgb, var(--ba-muted) 72%, transparent);
+}
+
+.bookkeeping-agent-composer-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding-top: 8px;
+	border-top: 1px solid var(--ba-soft-line);
+}
+
+.bookkeeping-agent-prompts {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 7px;
+	min-width: 0;
+}
+
+.bookkeeping-agent-prompt {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	min-height: 28px;
+	max-width: 100%;
+	border: 1px solid transparent;
+	border-radius: 999px;
+	padding: 5px 9px;
+	background: color-mix(in srgb, var(--ba-page) 78%, var(--ba-surface));
+	color: var(--ba-muted);
+	font-size: 12px;
+	font-weight: 650;
+	line-height: 1;
+	transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+}
+
+.bookkeeping-agent-prompt:hover,
+.bookkeeping-agent-prompt:focus-visible {
+	border-color: color-mix(in srgb, var(--ba-accent) 28%, var(--ba-line));
+	background: var(--ba-accent-soft);
+	color: var(--ba-accent);
+}
+
+.bookkeeping-agent-prompt span {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.bookkeeping-agent-composer-controls {
+	display: flex;
+	align-items: center;
+	flex: 0 0 auto;
+	gap: 8px;
+}
+
+.bookkeeping-agent-status {
+	border: 1px solid var(--ba-line);
+	border-radius: 999px;
+	padding: 5px 9px;
+	background: rgba(255, 255, 255, 0.72);
+	color: var(--ba-muted);
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.bookkeeping-agent-status.orange {
+	border-color: color-mix(in srgb, var(--ba-warn) 32%, var(--ba-line));
+	background: var(--ba-warn-soft);
+	color: var(--ba-warn);
+}
+
+.bookkeeping-agent .bookkeeping-agent-send.icon-btn {
+	width: 38px;
+	height: 38px;
+	min-height: 38px;
+	border-radius: 13px;
+	background: var(--ba-ink);
+	border-color: var(--ba-ink);
+	color: var(--ba-surface);
+}
+
+.bookkeeping-agent .bookkeeping-agent-send.icon-btn:hover {
+	background: #111516;
+	border-color: #111516;
+	color: var(--ba-surface);
+}
+
+.bookkeeping-agent .bookkeeping-agent-send.icon-btn:disabled {
+	background: var(--disabled-control-bg, #ecefed);
+	border-color: var(--ba-line);
+	color: var(--ba-muted);
+}
+
+.bookkeeping-agent .bookkeeping-agent-send.icon-btn.is-loading .icon {
+	animation: bookkeeping-agent-spin 0.8s linear infinite;
+}
+
+.bookkeeping-agent-composer-hint {
+	margin: 8px 8px 0;
+	color: var(--ba-muted);
+	font-size: 11px;
+	line-height: 1.35;
+}
+
+.bookkeeping-agent-loading-message .bookkeeping-agent-message-body {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	min-height: 24px;
+}
+
+.bookkeeping-agent-dot {
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--ba-muted);
+	animation: bookkeeping-agent-pulse 1s infinite ease-in-out;
+}
+
+.bookkeeping-agent-dot:nth-child(2) {
+	animation-delay: 0.15s;
+}
+
+.bookkeeping-agent-dot:nth-child(3) {
+	animation-delay: 0.3s;
+}
+
+@keyframes bookkeeping-agent-pulse {
+	0%,
+	80%,
+	100% {
+		opacity: 0.35;
+		transform: translateY(0);
+	}
+
+	40% {
+		opacity: 1;
+		transform: translateY(-2px);
+	}
+}
+
+@keyframes bookkeeping-agent-cursor {
+	0%,
+	49% {
+		opacity: 1;
+	}
+
+	50%,
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes bookkeeping-agent-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bookkeeping-agent-messages {
+		scroll-behavior: auto;
+	}
+
+	.bookkeeping-agent-dot,
+	.bookkeeping-agent-message-body.is-streaming::after,
+	.bookkeeping-agent .bookkeeping-agent-send.icon-btn.is-loading .icon {
+		animation: none;
+	}
+}
+
+@media (max-width: 900px) {
+	.bookkeeping-agent {
+		height: calc(100vh - 116px);
+		min-height: 0;
+		padding: 12px 14px 14px;
+	}
+
+	.bookkeeping-agent-messages {
+		padding: 12px 2px 18px;
+	}
+
+	.bookkeeping-agent-message,
+	.bookkeeping-agent-message-user {
+		width: 100%;
+	}
+
+	.bookkeeping-agent-message-user .bookkeeping-agent-message-content {
+		max-width: min(100%, 620px);
+	}
+
+	.bookkeeping-agent-composer {
+		padding: 0 0 2px;
+	}
+}
+
+@media (max-width: 620px) {
+	.bookkeeping-agent {
+		padding: 0;
+		background: var(--ba-page);
+	}
+
+	.bookkeeping-agent-welcome {
+		grid-template-columns: 1fr;
+		gap: 12px;
+		margin-top: 48px;
+		padding: 0 12px;
+	}
+
+	.bookkeeping-agent-message {
+		grid-template-columns: 28px minmax(0, 1fr);
+		gap: 9px;
+		margin-bottom: 24px;
+	}
+
+	.bookkeeping-agent-avatar {
+		width: 26px;
+		height: 26px;
+		border-radius: 9px;
+	}
+
+	.bookkeeping-agent-message-user .bookkeeping-agent-message-content {
+		max-width: 94%;
+	}
+
+	.bookkeeping-agent-message-body {
+		font-size: 13px;
+	}
+
+	.bookkeeping-agent-composer-footer {
+		align-items: flex-end;
+		flex-direction: column;
+	}
+
+	.bookkeeping-agent-prompts {
+		width: 100%;
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		padding-bottom: 2px;
+	}
+
+	.bookkeeping-agent-composer-controls {
+		width: 100%;
+		justify-content: space-between;
+	}
+
+	.bookkeeping-agent-workflow-summary,
+	.bookkeeping-agent-tool-title {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+
+	.bookkeeping-agent-workflow-state,
+	.bookkeeping-agent-tool-status {
+		align-self: flex-start;
+	}
+
+	.bookkeeping-agent-message-body th,
+	.bookkeeping-agent-message-body td {
+		padding: 6px 8px;
+	}
+}
